@@ -9,7 +9,7 @@ from .models import Greeting
 @csrf_exempt
 def accessUrl(request):
     reqBody = json.loads(request.body)
-    token_Jrequest = reqBody["challenge"]
+    token_Jrequest = reqBody["token"]
     if os.environ.get("ver_token") == token_Jrequest:
         challenge = reqBody["challenge"]
     else:
