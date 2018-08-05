@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -8,9 +9,9 @@ from .models import Greeting
 @csrf_exempt
 def accessUrl(request):
     reqBody = json.loads(request.body)
-    token_Jrequest = reqBody["Challenge"]
+    token_Jrequest = reqBody["challenge"]
     if os.environ.get("ver_token") == token_Jrequest:
-        challenge = reqBody["Challenge"]
+        challenge = reqBody["challenge"]
     else:
         challenge = "Your token is not the same"
     return HttpResponse(challenge, content_type="text/plain")
