@@ -13,6 +13,4 @@ def accessUrl(request):
         challenge = reqBody["Challenge"]
     else:
         challenge = "Your token is not the same"
-
-    print (challenge)
-    return ""
+    return HttpResponse(challenge, content_type="text/plain")
