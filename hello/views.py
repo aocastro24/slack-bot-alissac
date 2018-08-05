@@ -8,6 +8,11 @@ from .models import Greeting
 @csrf_exempt
 def accessUrl(request):
     reqBody = json.loads(request.body)
-    print (reqBody)
+    token_Jrequest = reqBody["Challenge"]
+    if os.environ.get("ver_token") == token_Jrequest:
+        challenge = reqBody["Challenge"]
+    else:
+        challenge = "Your token is not the same"
 
+    print (challenge)
     return ""
