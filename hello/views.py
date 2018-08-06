@@ -1,7 +1,6 @@
 from os import environ
+
 import slackclient
-# from django.shortcuts import render
-# from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from tweepy import OAuthHandler, API
 import json
