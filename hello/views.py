@@ -34,6 +34,7 @@ def trendingPosts():
 
 
 def responseBot(request):
+    print("check")
     channel_event = json.loads(request.body)
     get_eventChannel = channel_event["event"]["channel"]
     get_eventText = channel_event["event"]["text"]
@@ -57,7 +58,6 @@ def accessUrl(request):
     reqBody = json.loads(request.body)
     token_Jrequest = reqBody["token"]
     if environ.get("ver_token") == token_Jrequest:
-        print("check")
         # challenge = reqBody["challenge"]
         responseBot(request)
     else:
