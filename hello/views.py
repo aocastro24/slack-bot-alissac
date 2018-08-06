@@ -1,15 +1,15 @@
 import os
-import slackclient as SlackClient
+import slackclient
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from tweepy import OAuthHandler, API
 import json
 
-oAuth_token = os.environ.get('oAuth_token', None)
-slack_aToken = SlackClient(oAuth_token)
-bot_token = os.environ.get('bot_token', None)
-slack_bToken = SlackClient(bot_token)
+# oAuth_token = os.environ.get('oAuth_token', None)
+slack_aToken = slackclient.SlackClient(os.environ.get('oAuth_token', None))
+# bot_token = os.environ.get('bot_token', None)
+slack_bToken = slackclient.SlackClient(os.environ.get('bot_token', None))
 
 twitter_cKey = os.environ('consumer_key', None)
 twitter_sKey = os.environ('consumer_secret', None)
