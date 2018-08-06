@@ -1,18 +1,31 @@
 import os
-
 import SlackClient as SlackClient
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from tweepy import OAuthHandler, API
 import json
 
 slack_aToken = SlackClient(os.environ.get('oAuth_token', None))
 slack_bToken = SlackClient(os.environ.get('bot_token', None))
 
+twitter_cKey = os.environ('consumer_key', None)
+twitter_sKey = os.environ('consumer_secret', None)
+twitter_aToken = os.environ('access_token', None)
+twitter_aSToken = os.environ('access_token_secret', None)
+
+auth = OAuthHandler(twitter_cKey, twitter_sKey)
+auth.set_access_token(twitter_aToken, twitter_aSToken)
+api = API(auth)
+
 from .models import Greeting
 
 def trendingPosts():
-
+    WOE_ID = 1
+    trending = api.trends_place(WOE_ID)
+    print trending
+    trending = json.loads(json.dumps(trending, indent=1))
+    return trending
 
 def responseBot(request):
     channel_event = json.loads(request.body)
