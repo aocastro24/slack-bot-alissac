@@ -11,6 +11,7 @@ slack_aToken = slackclient.SlackClient(oAuth_token)
 bot_token = environ.get('bot_token', None)
 slack_bToken = slackclient.SlackClient(bot_token)
 
+
 def trendingPosts():
     twitter_cKey = environ.get('consumer_key', None)
     twitter_sKey = environ.get('consumer_secret', None)
@@ -23,9 +24,15 @@ def trendingPosts():
 
     WOE_ID = 1
     trending = api.trends_place(WOE_ID)
-    print(trending)
     trending = json.loads(json.dumps(trending, indent=1))
-    return trending
+    trend_list = []
+    for trend in trending[0]["trends"]:
+        trend_list.append((trend["name"]))
+
+    trend_list = ', \n'.join(trend_list[:10])
+
+    return trend_list
+
 
 def responseBot(request):
     channel_event = json.loads(request.body)
@@ -35,8 +42,8 @@ def responseBot(request):
     if ("top" in get_eventText) or ("trending" in get_eventText):
         slack_aToken.api_call(
             "chat.postMessage",
-            channel = get_eventChannel,
-            text = trendingPosts
+            channel=get_eventChannel,
+            text=trendingPosts()
         )
     else:
         slack_aToken.api_call(
@@ -45,6 +52,7 @@ def responseBot(request):
             text="Can't find trending posts. Sorry! Try again tomorrow :D"
         )
     return ""
+
 
 @csrf_exempt
 def accessUrl(request):
