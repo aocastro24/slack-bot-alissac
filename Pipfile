@@ -8,6 +8,7 @@ gunicorn = "*"
 tweepy = "*"
 slackclient = "*"
 schedule = "*"
+apscheduler = "*"
 
 [requires]
 python_version = "3.6"
