@@ -37,13 +37,13 @@ def responseBot(request):
     get_eventChannel = channel_event["event"]["channel"]
     get_eventText = channel_event["event"]["text"]
     if "top" in get_eventText:
-        slack_aToken.api_call(
+        slack_bToken.api_call(
             "chat.postMessage",
             channel=get_eventChannel,
             text=trendingPosts()
         )
     else:
-        slack_aToken.api_call(
+        slack_bToken.api_call(
             "chat.postMessage",
             channel=get_eventChannel,
             text="Can't find trending posts. Sorry! Try again tomorrow :D"
