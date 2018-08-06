@@ -35,7 +35,7 @@ def responseBot(request):
     channel_event = json.loads(request.body)
     get_eventChannel = channel_event["event"]["channel"]
     get_eventText = channel_event["event"]["text"]
-    if ("top" in get_eventText):
+    if ("top" in get_eventText) or ("trending" in get_eventText):
         slack_bToken.api_call(
             "chat.postMessage",
             channel=get_eventChannel,
@@ -45,7 +45,7 @@ def responseBot(request):
         slack_bToken.api_call(
             "chat.postMessage",
             channel=get_eventChannel,
-            text="Can't find trending posts. Sorry! Try again tomorrow :D"
+            text="Can't find trending posts. Sorry! Try other keywords such as top or trending"
         )
     return ""
 
