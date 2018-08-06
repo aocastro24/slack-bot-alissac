@@ -51,7 +51,7 @@ def accessUrl(request):
     token_Jrequest = reqBody["token"]
     if os.environ.get("ver_token") == token_Jrequest:
         # challenge = reqBody["challenge"]
-        getChannel(request)
+        responseBot(request)
     else:
         challenge = "Your token is not the same"
     return HttpResponse(challenge, content_type="text/plain")
