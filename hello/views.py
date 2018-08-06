@@ -37,7 +37,7 @@ def responseBot(request):
     channel_event = json.loads(request.body)
     get_eventChannel = channel_event["event"]["channel"]
     get_eventText = channel_event["event"]["text"]
-
+    print "Check"
     if ("top" in get_eventText) or ("trending" in get_eventText):
         slack_aToken.api_call(
             "chat.postMessage",
