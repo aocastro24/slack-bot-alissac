@@ -23,7 +23,7 @@ from .models import Greeting
 def trendingPosts():
     WOE_ID = 1
     trending = api.trends_place(WOE_ID)
-    print trending
+    print(trending)
     trending = json.loads(json.dumps(trending, indent=1))
     return trending
 
