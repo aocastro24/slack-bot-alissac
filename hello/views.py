@@ -1,7 +1,7 @@
 from os import environ
 import slackclient
-from django.shortcuts import render
-from django.http import HttpResponse
+# from django.shortcuts import render
+# from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from tweepy import OAuthHandler, API
 import json
@@ -51,7 +51,7 @@ def responseBot(request):
 def accessUrl(request):
     reqBody = json.loads(request.body)
     token_Jrequest = reqBody["token"]
-    if os.environ.get("ver_token") == token_Jrequest:
+    if environ.get("ver_token") == token_Jrequest:
         # challenge = reqBody["challenge"]
         responseBot(request)
     else:
