@@ -1,6 +1,7 @@
 from os import environ
 
 import slackclient
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from tweepy import OAuthHandler, API
 import json
@@ -58,4 +59,4 @@ def accessUrl(request):
         responseBot(request)
     else:
         challenge = "Your token is not the same"
-    return request
+    return HttpResponse(request)
