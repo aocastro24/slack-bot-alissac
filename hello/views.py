@@ -12,10 +12,10 @@ bot_token = environ.get('bot_token', None)
 slack_bToken = slackclient.SlackClient(bot_token)
 
 def trendingPosts():
-    twitter_cKey = environ('consumer_key', None)
-    twitter_sKey = environ('consumer_secret', None)
-    twitter_aToken = environ('access_token', None)
-    twitter_aSToken = environ('access_token_secret', None)
+    twitter_cKey = environ.get('consumer_key', None)
+    twitter_sKey = environ.get('consumer_secret', None)
+    twitter_aToken = environ.get('access_token', None)
+    twitter_aSToken = environ.get('access_token_secret', None)
 
     auth = OAuthHandler(twitter_cKey, twitter_sKey)
     auth.set_access_token(twitter_aToken, twitter_aSToken)
