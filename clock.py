@@ -8,7 +8,7 @@ sched = BlockingScheduler()
 # def timed_job():
 #     slack_bToken.api_call(
 #         "chat.postMessage",
-#         channel="CC4A68V54",
+#         channel="CC316TH17",
 #         text=trendingPosts()
 #     )
 
@@ -16,7 +16,7 @@ sched = BlockingScheduler()
 def scheduled_job():
     slack_bToken.api_call(
         "chat.postMessage",
-        channel="CC4A68V54",
+        channel="CC316TH17",
         text=trendingPosts()
     )
 
