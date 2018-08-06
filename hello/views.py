@@ -6,14 +6,10 @@ from django.views.decorators.csrf import csrf_exempt
 from tweepy import OAuthHandler, API
 import json
 
-# oAuth_token = environ.get('oAuth_token', None)
-slack_aToken = slackclient.SlackClient(environ.get('oAuth_token', None))
-# bot_token = environ.get('bot_token', None)
-slack_bToken = slackclient.SlackClient(environ.get('bot_token', None))
-
-
-
-from .models import Greeting
+oAuth_token = environ.get('oAuth_token', None)
+slack_aToken = slackclient.SlackClient(oAuth_token)
+bot_token = environ.get('bot_token', None)
+slack_bToken = slackclient.SlackClient(bot_token)
 
 def trendingPosts():
     twitter_cKey = environ('consumer_key', None)
@@ -24,7 +20,7 @@ def trendingPosts():
     auth = OAuthHandler(twitter_cKey, twitter_sKey)
     auth.set_access_token(twitter_aToken, twitter_aSToken)
     api = API(auth)
-    
+
     WOE_ID = 1
     trending = api.trends_place(WOE_ID)
     print(trending)
@@ -35,11 +31,12 @@ def responseBot(request):
     channel_event = json.loads(request.body)
     get_eventChannel = channel_event["event"]["channel"]
     get_eventText = channel_event["event"]["text"]
+
     if ("top" in get_eventText) or ("trending" in get_eventText):
         slack_aToken.api_call(
             "chat.postMessage",
             channel = get_eventChannel,
-            text = trendingPosts()
+            text = trendingPosts
         )
     else:
         slack_aToken.api_call(
