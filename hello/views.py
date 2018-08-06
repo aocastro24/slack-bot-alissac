@@ -11,18 +11,20 @@ slack_aToken = slackclient.SlackClient(environ.get('oAuth_token', None))
 # bot_token = environ.get('bot_token', None)
 slack_bToken = slackclient.SlackClient(environ.get('bot_token', None))
 
-twitter_cKey = environ('consumer_key', None)
-twitter_sKey = environ('consumer_secret', None)
-twitter_aToken = environ('access_token', None)
-twitter_aSToken = environ('access_token_secret', None)
 
-auth = OAuthHandler(twitter_cKey, twitter_sKey)
-auth.set_access_token(twitter_aToken, twitter_aSToken)
-api = API(auth)
 
 from .models import Greeting
 
 def trendingPosts():
+    twitter_cKey = environ('consumer_key', None)
+    twitter_sKey = environ('consumer_secret', None)
+    twitter_aToken = environ('access_token', None)
+    twitter_aSToken = environ('access_token_secret', None)
+
+    auth = OAuthHandler(twitter_cKey, twitter_sKey)
+    auth.set_access_token(twitter_aToken, twitter_aSToken)
+    api = API(auth)
+    
     WOE_ID = 1
     trending = api.trends_place(WOE_ID)
     print(trending)
@@ -36,13 +38,13 @@ def responseBot(request):
     if ("top" in get_eventText) or ("trending" in get_eventText):
         slack_aToken.api_call(
             "chat.postMessage",
-            channel = "CC4A68V54",
+            channel = get_eventChannel,
             text = trendingPosts()
         )
     else:
         slack_aToken.api_call(
             "chat.postMessage",
-            channel="CC4A68V54",
+            channel=get_eventChannel,
             text="Can't find trending posts. Sorry! Try again tomorrow :D"
         )
     return ""
