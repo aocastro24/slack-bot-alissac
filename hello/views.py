@@ -1,4 +1,4 @@
-import os
+from os import environ
 import slackclient
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -6,15 +6,15 @@ from django.views.decorators.csrf import csrf_exempt
 from tweepy import OAuthHandler, API
 import json
 
-# oAuth_token = os.environ.get('oAuth_token', None)
-slack_aToken = slackclient.SlackClient(os.environ.get('oAuth_token', None))
-# bot_token = os.environ.get('bot_token', None)
-slack_bToken = slackclient.SlackClient(os.environ.get('bot_token', None))
+# oAuth_token = environ.get('oAuth_token', None)
+slack_aToken = slackclient.SlackClient(environ.get('oAuth_token', None))
+# bot_token = environ.get('bot_token', None)
+slack_bToken = slackclient.SlackClient(environ.get('bot_token', None))
 
-twitter_cKey = os.environ('consumer_key', None)
-twitter_sKey = os.environ('consumer_secret', None)
-twitter_aToken = os.environ('access_token', None)
-twitter_aSToken = os.environ('access_token_secret', None)
+twitter_cKey = environ('consumer_key', None)
+twitter_sKey = environ('consumer_secret', None)
+twitter_aToken = environ('access_token', None)
+twitter_aSToken = environ('access_token_secret', None)
 
 auth = OAuthHandler(twitter_cKey, twitter_sKey)
 auth.set_access_token(twitter_aToken, twitter_aSToken)
@@ -56,4 +56,4 @@ def accessUrl(request):
         responseBot(request)
     else:
         challenge = "Your token is not the same"
-    return HttpResponse(challenge, content_type="text/plain")
+    return request
