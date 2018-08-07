@@ -14,7 +14,7 @@ sched = BlockingScheduler()
 #         text=trendingPosts()
 #     )
 google = "google.com"
-ping_google = os.system("ping " + google)
+ping_google = os.system("ping -c 1" + google)
 
 @sched.scheduled_job('interval', minutes=15)
 def timed_job():
