@@ -25,13 +25,10 @@ def trendingPosts():
     trending = api.trends_place(WOE_ID)
     trending = json.loads(json.dumps(trending, indent=1))
     get_trending = json.loads(json.dumps(trending))
-    tweet_vol = get_trending["tweet_volume"]
     trend_list = []
-    trend_list.sort(key=tweet_vol)
     for trend in trending[0]["trends"]:
         trend_list.append((trend["name"]))
     trend_list = ', \n'.join(trend_list[:10])
-
 
     return trend_list
 
