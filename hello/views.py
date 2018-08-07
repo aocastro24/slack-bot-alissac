@@ -24,7 +24,8 @@ def trendingPosts():
     WOE_ID = 1
     trending = api.trends_place(WOE_ID)
     trending = json.loads(json.dumps(trending, indent=1))
-    trend_list = [].sort()
+    trend_list = []
+    trend_list.sort()
     for trend in trending[0]["trends"]:
         trend_list.append((trend["name"]))
     trend_list = ', \n'.join(trend_list[:10])
